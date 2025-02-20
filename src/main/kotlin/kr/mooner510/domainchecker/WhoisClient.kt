@@ -24,9 +24,10 @@ object WhoisClient {
 
                     val input = socket.getInputStream()
 
-                    val reader = BufferedReader(InputStreamReader(input))
+                    val line = BufferedReader(InputStreamReader(input)).use { it.readLine() ?: return false }
 
-                    val line = reader.readLine() ?: return false
+                    output.close()
+                    writer.close()
 
                     return !(line[0] == 'N' && line[1] == 'o')
                 }

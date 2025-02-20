@@ -25,6 +25,16 @@ object RangeMaker {
         return this.stream().filter { it >= domain }.toList()
     }
 
+    fun String.toId(suffix: String = ".com"): Int {
+        var id = 0
+        var weight = 1
+        for (i in this.length - suffix.length - 1 downTo 0) {
+            id += ('z' - this[i]) * weight
+            weight *= 26
+        }
+        return id
+    }
+
     fun Int.toDomain(): String {
         return buildString {
             var cursor = this@toDomain
